@@ -1,0 +1,22 @@
+#include <QApplication>
+
+#include "mainwindow.h"
+
+/**<
+This comment is not only a C++ comment since it has the starting and ending
+delimiters of a C-style C++ comment, but because of the extra characters at
+the end of the starting delimiter it also will be recognized by the doxygen
+utility and given special treatment. By the way, that last (optional) <
+character at the end of the opening delimiter is critical if you want to place
+the doxygen comment *after* the thing you are documenting. If that final < is
+missing, the comment is interpreted as coming before the thing being documented.
+*/
+
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+
+    QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);
+    MainWindow mainWindow;
+    mainWindow.show();
+    return a.exec();
+}

@@ -32,7 +32,13 @@ find_package(QT NAMES Qt5)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED
     Core
     Gui
+    Widgets
+    Xml
 )
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 add_library(${PROJECT_NAME} STATIC ${PUBLIC} ${SOURCES})
 
@@ -46,7 +52,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Gui
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC TRUE)
+#set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC TRUE)
 
 add_subdirectory(test)
 

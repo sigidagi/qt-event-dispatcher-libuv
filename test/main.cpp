@@ -1,13 +1,16 @@
 #include "eventdispatcherlibuv.h"
+#include "mainwindow.h"
 
-#include <QGuiApplication>
+#include <QApplication>
 
 int main(int argc, char **argv) {
 
-    QCoreApplication::setEventDispatcher(new qtjs::EventDispatcherLibUv);
-    QCoreApplication app(argc, argv);
+    QApplication::setEventDispatcher(new qtjs::EventDispatcherLibUv);
+    QApplication app(argc, argv);
 
-    // TODO
-    // ...
+    QApplication::setAttribute(Qt::AA_DontUseNativeMenuBar);
+    MainWindow mainWindow;
+    mainWindow.show();
+
     return app.exec();
 }
