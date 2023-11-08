@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 project(qt-event-dispatcher-libuv)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Don't use e.g. GNU extension (like -std=gnu++11) for portability
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -11,8 +11,9 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 include(CPM)
 # Add targets for formating cpp and cmake files. See README.md
-CPMAddPackage("gh:libuv/libuv@1.47.0")
+CPMAddPackage("gh:libuv/libuv@1.46.0")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
+CPMAddPackage("gh:skypjack/uvw@3.2.0_libuv_v1.46")
 
 set(PUBLIC
     src/eventdispatcherlibuv.h
@@ -42,9 +43,12 @@ set(CMAKE_AUTOUIC ON)
 
 add_library(${PROJECT_NAME} STATIC ${PUBLIC} ${SOURCES})
 
+message(STATUS "libuv source dir: ${uvw_SOURCE_DIR}")
+
 target_include_directories(${PROJECT_NAME} 
     PRIVATE ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
     PUBLIC ${CMAKE_SOURCE_DIR}/src
+           ${uvw_SOURCE_DIR}/src
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC 

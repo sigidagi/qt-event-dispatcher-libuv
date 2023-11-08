@@ -12,6 +12,8 @@ set(PROJECT_SOURCES
     teammembermodel.cpp
     addmemberdialog.cpp
     xmlhandler.cpp
+    #websocket/websocket.cpp
+    #websocket/url.cpp
 )
 
 message(STATUS "QT include: ${Qt5_INCLUDE_DIRS}")
@@ -25,3 +27,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Xml
 )
 
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/third_party/cppcodec
+)
