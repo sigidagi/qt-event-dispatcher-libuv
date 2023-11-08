@@ -1,0 +1,6 @@
+CMakeUserPresets.json
+compile_commands.json
+/build/*
+/.venv/*
+/.cache/*
+/.ccls-cache/*
