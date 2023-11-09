@@ -87,7 +87,7 @@ bool EventDispatcherLibUv::processEvents(QEventLoop::ProcessEventsFlags flags) {
 #endif
     if (!leftHandles) {
         if (osEventDispatcher) {
-            osEventDispatcher->processEvents(flags & ~QEventLoop::EventLoopExec | QEventLoop::WaitForMoreEvents);
+            osEventDispatcher->processEvents((flags & ~QEventLoop::EventLoopExec) | QEventLoop::WaitForMoreEvents);
         } else if (finalise) {
             qApp->exit(0);
         }

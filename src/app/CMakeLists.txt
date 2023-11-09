@@ -12,8 +12,7 @@ set(PROJECT_SOURCES
     teammembermodel.cpp
     addmemberdialog.cpp
     xmlhandler.cpp
-    #websocket/websocket.cpp
-    #websocket/url.cpp
+    messagehandler.cpp
 )
 
 message(STATUS "QT include: ${Qt5_INCLUDE_DIRS}")
@@ -23,10 +22,15 @@ target_compile_options(${PROJECT_NAME} PUBLIC -Wall -pedantic)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     qt-event-dispatcher-libuv
+    unet
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Xml
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE
-    ${CMAKE_SOURCE_DIR}/third_party/cppcodec
+add_custom_command(
+    TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_BINARY_DIR}/src/app/${PROJECT_NAME}
+            ${CMAKE_BINARY_DIR}/${PROJECT_NAME}
 )
+

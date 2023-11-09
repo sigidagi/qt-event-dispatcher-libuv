@@ -21,6 +21,7 @@ class MainWindow : public QMainWindow {
   public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    const TeamMemberView *teamMemberView();
 
   public slots:
     /**

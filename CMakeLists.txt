@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(qt-event-dispatcher-libuv)
+project(libuv-demo)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
@@ -15,18 +15,11 @@ CPMAddPackage("gh:libuv/libuv@1.46.0")
 CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 CPMAddPackage("gh:skypjack/uvw@3.2.0_libuv_v1.46")
 
-set(PUBLIC
-    src/eventdispatcherlibuv.h
-)
-
-set(SOURCES
-    src/eventdispatcherlibuv_p.h
-    src/eventdispatcherlibuv.cpp
-    src/eventdispatcherlibuv/async_channel.cpp
-    src/eventdispatcherlibuv/timer_notifier.cpp
-    src/eventdispatcherlibuv/time_tracker.cpp
-    src/eventdispatcherlibuv/libuv_api.cpp
-    src/eventdispatcherlibuv/socket_notifier.cpp
+add_compile_options(
+    -g
+    -Wall
+    -Wextra
+    -Wno-unused-parameter
 )
 
 find_package(QT NAMES Qt5)
@@ -41,22 +34,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-add_library(${PROJECT_NAME} STATIC ${PUBLIC} ${SOURCES})
-
 message(STATUS "libuv source dir: ${uvw_SOURCE_DIR}")
 
-target_include_directories(${PROJECT_NAME} 
-    PRIVATE ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
-    PUBLIC ${CMAKE_SOURCE_DIR}/src
-           ${uvw_SOURCE_DIR}/src
-)
-
-target_link_libraries(${PROJECT_NAME} PUBLIC 
-    uv
-    Qt${QT_VERSION_MAJOR}::Core
-    Qt${QT_VERSION_MAJOR}::Gui
-)
-#set_target_properties(${PROJECT_NAME} PROPERTIES AUTOMOC TRUE)
-
-add_subdirectory(test)
+add_subdirectory(src/networking)
+add_subdirectory(src/dispatcher)
+add_subdirectory(src/app)
 

@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     connectUi();
 }
 
+const TeamMemberView *MainWindow::teamMemberView() { return m_teamMemberView; }
+
 void MainWindow::connectUi() {
     connect(m_teamMemberView, SIGNAL(teamMemberAddedModel(QString)), m_teamView, SLOT(onTeamMemberAdded(QString)));
     connect(m_teamMemberView->getModel(), SIGNAL(teamMemberRemoved(int)), m_teamView, SLOT(onTeamMemberRemoved(int)));
